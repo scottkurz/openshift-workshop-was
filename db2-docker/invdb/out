@@ -1,0 +1,336 @@
+(*) Restoring global registry file ...
+(*) Previous setup has not been detected. Creating the users... 
+(*) Creating users ...
+useradd: warning: the home directory already exists.
+Not copying any file from skel directory into it.
+useradd: warning: the home directory already exists.
+Not copying any file from skel directory into it.
+(*) Preparing the environment before updating the instance ... 
+(*) Fixing /etc/services file for DB2 ... 
+(*) Fixing db2nodes file configuration ... 
+08/20/2021 12:05:41     0   0   SQL1032N  No start database manager command was issued.
+SQL1032N  No start database manager command was issued.  SQLSTATE=57019
+(*) Creating instance ... 
+DBI1446I  The db2icrt command is running.
+
+
+DB2 installation is being initialized.
+
+ Total number of tasks to be performed: 4 
+Total estimated time for all tasks to be performed: 309 second(s) 
+
+Task #1 start
+Description: Setting default global profile registry variables 
+Estimated time 1 second(s) 
+Task #1 end 
+
+Task #2 start
+Description: Initializing instance list 
+Estimated time 5 second(s) 
+Task #2 end 
+
+Task #3 start
+Description: Configuring DB2 instances 
+Estimated time 300 second(s) 
+Task #3 end 
+
+Task #4 start
+Description: Updating global profile registry 
+Estimated time 3 second(s) 
+Task #4 end 
+
+The execution completed successfully.
+
+For more information see the DB2 installation log at "/tmp/db2icrt.log.782".
+DBI1070I  Program db2icrt completed successfully.
+
+
+08/20/2021 12:06:02     0   0   SQL1032N  No start database manager command was issued.
+SQL1032N  No start database manager command was issued.  SQLSTATE=57019
+(*) Cataloging existing databases
+(*) Cataloging database INVDB on /database/data ... 
+SQL1005N  The database alias "INVDB" already exists in either the local 
+database directory or system database directory.
+(*) Applying Db2 license ...
+
+LIC1402I  License added successfully.
+
+
+LIC1426I  This product is now licensed for use as outlined in your License Agreement.  USE OF THE PRODUCT CONSTITUTES ACCEPTANCE OF THE TERMS OF THE IBM LICENSE AGREEMENT, LOCATED IN THE FOLLOWING DIRECTORY: "/opt/ibm/db2/V11.5/license/en_US.iso88591"
+(*) Saving the checksum of the current nodelock file ...
+(*) Updating DBM CFG parameters ... 
+DB20000I  The UPDATE DATABASE MANAGER CONFIGURATION command completed 
+successfully.
+DB20000I  The UPDATE DATABASE MANAGER CONFIGURATION command completed 
+successfully.
+DB20000I  The UPDATE DATABASE MANAGER CONFIGURATION command completed 
+successfully.
+No Cgroup memory limit detected, instance memory will follow automatic tuning
+(*) Remounting /database with suid... 
+(*) Cannot retrieve db2 database configuration parameters. Calling an upgrade.
+(*) Upgrading database INVDB ... 
+08/20/2021 12:06:17     0   0   SQL1063N  DB2START processing was successful.
+SQL1063N  DB2START processing was successful.
+SQL1005N  The database alias "INVDB" already exists in either the local 
+database directory or system database directory.
+SQL1103W  The UPGRADE DATABASE command was completed successfully.
+
+
+_________________________________________________________________________     
+                                                                              
+                    _____   DB2 Service Tools   _____                         
+                                                                              
+                            I      B      M                                   
+                                                                              
+                               db2updv115                                      
+                                                                              
+   This tool is a service utility designed to update a DB2 Version 11.5       
+   database to the current fix pack level.                                    
+                                                                              
+_________________________________________________________________________     
+
+
+DB2 Universal Database Version 11.5, 5622-044 (c) Copyright IBM Corp. 2017
+Licensed Material - Program Property of IBM
+IBM DATABASE 2 Database update to current fix pack tool
+
+db2updv115 completed successfully for database 'INVDB'. 
+
+DB2 State : Available
+DB2 has been started
+ssh-keygen: generating new host keys: RSA1 RSA DSA ECDSA ED25519 
+(*) All databases are now active. 
+(*) Setup has completed.
+(*) Running user-provided scripts ... 
+(*) Running InventoryCreate.sql ...
+/var/custom/InventoryCreate.sql: line 1: ---DELETE: command not found
+/var/custom/InventoryCreate.sql: line 1: $'\r': command not found
+/var/custom/InventoryCreate.sql: line 2: $'\r': command not found
+/var/custom/InventoryCreate.sql: line 3: ---DELETE: command not found
+/var/custom/InventoryCreate.sql: line 3: $'\r': command not found
+/var/custom/InventoryCreate.sql: line 4: $'\r': command not found
+/var/custom/InventoryCreate.sql: line 5: ---DROP: command not found
+/var/custom/InventoryCreate.sql: line 5: $'\r': command not found
+/var/custom/InventoryCreate.sql: line 6: $'\r': command not found
+/var/custom/InventoryCreate.sql: line 7: ---DROP: command not found
+/var/custom/InventoryCreate.sql: line 7: $'\r': command not found
+/var/custom/InventoryCreate.sql: line 8: $'\r': command not found
+/var/custom/InventoryCreate.sql: line 9: syntax error near unexpected token `('
+/var/custom/InventoryCreate.sql: line 9: `CREATE TABLE PRODUCT ('
+(*) Running InventoryData.sql ...
+/var/custom/InventoryData.sql: line 1: syntax error near unexpected token `('
+/var/custom/InventoryData.sql: line 1: `INSERT INTO SUPPLIER (SUPP_ID, NAME)'
+(*) Running populateDB.sh ...
+root
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 11.5.5.0
+ SQL authorization ID   = DB2INST1
+ Local database alias   = INVDB
+
+CREATE TABLE PRODUCT ( SKU INTEGER NOT NULL generated by default as identity, INSTOCK INTEGER, VERSION INTEGER, SUPP_ID INTEGER )
+DB20000I  The SQL command completed successfully.
+
+ALTER TABLE PRODUCT ADD CONSTRAINT PRODUCT_PK PRIMARY KEY (SKU)
+DB20000I  The SQL command completed successfully.
+
+CREATE TABLE SUPPLIER ( SUPP_ID INTEGER NOT NULL, NAME VARCHAR (50) )
+DB20000I  The SQL command completed successfully.
+
+ALTER TABLE SUPPLIER ADD CONSTRAINT SUPPLIER_PK PRIMARY KEY (SUPP_ID)
+DB20000I  The SQL command completed successfully.
+
+ALTER TABLE PRODUCT	ADD CONSTRAINT PRODUCT_FK FOREIGN KEY (SUPP_ID) REFERENCES SUPPLIER (SUPP_ID)
+DB20000I  The SQL command completed successfully.
+
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 11.5.5.0
+ SQL authorization ID   = DB2INST1
+ Local database alias   = INVDB
+
+INSERT INTO SUPPLIER (SUPP_ID, NAME) VALUES (1, 'DEPOT1') 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO SUPPLIER (SUPP_ID, NAME) VALUES (2, 'DEPOT2') 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (1, 20, 1, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (2, 2, 2, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (3, 2, 1, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (10, 11, 2, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (20, 200, 1, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (21, 0, 2, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (30, 11, 1, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (31, 2, 2, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (40, 14, 1, 1) 
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCT (SKU, INSTOCK, SUPP_ID, VERSION) VALUES (41, 1, 2, 1) 
+DB20000I  The SQL command completed successfully.
+
+2021-08-20-12.06.24.859024+000 I575329E541           LEVEL: Info
+PID     : 14430                TID : 140712716789504 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB   
+HOSTNAME: d5b395d7df44
+EDUID   : 71                   EDUNAME: db2loggw (INVDB) 0
+FUNCTION: DB2 UDB, data protection services, sqpLoggwEdu::sqlpLoggwMain, probe:2250
+MESSAGE : Active read only logs files are being opened in buffered mode 
+          starting at log extent:
+DATA #1 : SQLPG_EXTENT_NUM, PD_TYPE_SQLPG_EXTENT_NUM, 4 bytes
+6
+
+2021-08-20-12.06.31.255972+000 I575871E1128          LEVEL: Info
+PID     : 14430                TID : 140712628709120 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB
+APPHDL  : 0-36                 APPID: *LOCAL.DB2.210820120649
+AUTHID  : DB2INST1             HOSTNAME: d5b395d7df44
+EDUID   : 95                   EDUNAME: db2cmpd (INVDB) 0
+FUNCTION: DB2 UDB, base sys utilities, sqleCompDaemon, probe:256
+DATA #1 : String, 279 bytes
+REORG RECOMPRESS: Ending compression daemon.  Data items:
+(2) checkForForceInterrupts
+(3) agentForced
+(4) dbStateMap
+(5) compDaemonWakeupIntervalTime (milliseconds)
+(6) compDaemonTCBScanListInterval (seconds)
+(7) mMaxNumAutoGroomJobs
+(8) lastTCBScanTime
+(9) totalNumAutoGroomJobs
+DATA #2 : Boolean, 1 bytes
+true
+DATA #3 : Boolean, 1 bytes
+true
+DATA #4 : Hex integer, 4 bytes
+0x00000941
+DATA #5 : Time in milliseconds, PD_TYPE_CDE_TIME_MILLIS, 8 bytes
+10000
+DATA #6 : unsigned integer, 4 bytes
+120
+DATA #7 : unsigned integer, 8 bytes
+3
+DATA #8 : sqlo_datetime timestamp, PD_TYPE_SQLO_DATETIME, 12 bytes
+2021-08-20-12.06.24
+DATA #9 : unsigned integer, 8 bytes
+0
+
+2021-08-20-12.06.31.261134+000 E577000E586           LEVEL: Info
+PID     : 14430                TID : 140712637097728 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB
+APPHDL  : 0-39                 APPID: *LOCAL.db2inst1.210820120652
+AUTHID  : DB2INST1             HOSTNAME: d5b395d7df44
+EDUID   : 97                   EDUNAME: db2agent (INVDB) 0
+FUNCTION: DB2 UDB, buffer pool services, sqlbCleanupBeforeTerm, probe:8215
+DATA #1 : SQLP_LSN8, PD_TYPE_SQLP_LSN8, 8 bytes
+00000000000444D0
+DATA #2 : SQLP_LSN8, PD_TYPE_SQLP_LSN8, 8 bytes
+00000000000444D0
+
+2021-08-20-12.06.31.288235+000 E577587E1085          LEVEL: Info
+PID     : 14430                TID : 140712725178112 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB   
+HOSTNAME: d5b395d7df44
+EDUID   : 70                   EDUNAME: db2loggr (INVDB) 0
+FUNCTION: DB2 UDB, data protection services, sqpLoggrEdu::sqlpghck, probe:2820
+DATA #1 : <preformatted>
+Log stream 0 has been marked consistent.
+                     File Count: 15
+                 Head Extent ID: 7
+           Group Head Extent ID: 6
+ Extraction Last Committed Meta: 4294967295
+                Rename Arch Num: 5
+                    Startup LSO: 0
+                       Base LSO: 74052769
+            Last Log Record LSO: 69939690
+            Last Log Record LSN: 00000000000444CF
+                       Next LSN: 00000000000444D0
+                    Lowtran LSN: 00000000000444D0
+                    Minbuff LSN: 00000000000444D0
+                       Head LSN: 00000000000444D0
+                 Group Head LSN: 00000000000444D0
+              Group Minbuff LSN: 00000000000444D0
+
+2021-08-20-12.06.31.291320+000 E578673E572           LEVEL: Info
+PID     : 14430                TID : 140712725178112 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB   
+HOSTNAME: d5b395d7df44
+EDUID   : 70                   EDUNAME: db2loggr (INVDB) 0
+FUNCTION: DB2 UDB, data protection services, sqpLoggrEdu::sqlpghck, probe:2889
+DATA #1 : <preformatted>
+Database has been marked consistent.
+                   Log Chain ID: 0
+                    Log Primary: 16
+                     Log Second: 22
+                  Log File Size: 1024
+
+2021-08-20-12.06.31.291420+000 I579246E483           LEVEL: Info
+PID     : 14430                TID : 140712712595200 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB   
+HOSTNAME: d5b395d7df44
+EDUID   : 69                   EDUNAME: db2logmgr (INVDB) 0
+FUNCTION: DB2 UDB, data protection services, sqpLogMgrEdu::sqlpgHandleLogMgrPost, probe:9000
+DATA #1 : <preformatted>
+Log Manager has been requested by database shutdown to stop for log stream 0.
+
+2021-08-20-12.06.31.291528+000 E579730E432           LEVEL: Info
+PID     : 14430                TID : 140712712595200 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB   
+HOSTNAME: d5b395d7df44
+EDUID   : 69                   EDUNAME: db2logmgr (INVDB) 0
+FUNCTION: DB2 UDB, data protection services, sqlpgArchiveLogFile, probe:3108
+DATA #1 : <preformatted>
+Started archive for log file S0000006.LOG.
+
+2021-08-20-12.06.31.291593+000 E580163E428           LEVEL: Info
+PID     : 14430                TID : 140712712595200 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB   
+HOSTNAME: d5b395d7df44
+EDUID   : 69                   EDUNAME: db2logmgr (INVDB) 0
+FUNCTION: DB2 UDB, data protection services, sqlpgArchiveLogFile, probe:3109
+MESSAGE : ADM1844I  Started archive for log file "S0000006.LOG"
+
+2021-08-20-12.06.31.293425+000 I580592E562           LEVEL: Info
+PID     : 14430                TID : 140712712595200 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB   
+HOSTNAME: d5b395d7df44
+EDUID   : 69                   EDUNAME: db2logmgr (INVDB) 0
+FUNCTION: DB2 UDB, data protection services, sqlpgArchiveLogFile, probe:3180
+DATA #1 : <preformatted>
+Completed archive for log file S0000006.LOG to /database/logs/db2inst1/INVDB/NODE0000/LOGSTREAM0000/C0000000/ from /database/data/db2inst1/NODE0000/SQL00001/LOGSTREAM0000/.
+
+2021-08-20-12.06.31.293524+000 E581155E585           LEVEL: Info
+PID     : 14430                TID : 140712712595200 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB   
+HOSTNAME: d5b395d7df44
+EDUID   : 69                   EDUNAME: db2logmgr (INVDB) 0
+FUNCTION: DB2 UDB, data protection services, sqlpgArchiveLogFile, probe:3175
+MESSAGE : ADM1846I  Completed archive for log file "S0000006.LOG" to 
+          "/database/logs/db2inst1/INVDB/NODE0000/LOGSTREAM0000/C0000000/" from 
+          "/database/data/db2inst1/NODE0000/SQL00001/LOGSTREAM0000/".
+
+2021-08-20-12.06.31.353364+000 E581741E524           LEVEL: Event
+PID     : 14430                TID : 140712637097728 PROC : db2sysc 0
+INSTANCE: db2inst1             NODE : 000            DB   : INVDB
+APPHDL  : 0-39                 APPID: *LOCAL.db2inst1.210820120652
+AUTHID  : DB2INST1             HOSTNAME: d5b395d7df44
+EDUID   : 97                   EDUNAME: db2agent (idle) 0
+FUNCTION: DB2 UDB, base sys utilities, sqeLocalDatabase::FreeResourcesOnDBShutdown, probe:16562
+STOP    : DATABASE: INVDB    : DEACTIVATED: NO
