@@ -67,7 +67,8 @@
               <context-root>CustomerOrderServicesTest</context-root>
             </webModule>
           </modules>
-          <applicationXml>${project.basedir}/src/main/application/application.xml</applicationXml>
+           <fileNameMapping>no-version</fileNameMapping>
+          <applicationXml>${project.basedir}/src/main/application/META-INF/application.xml</applicationXml>
           <earSourceDirectory>${project.basedir}/src/main/resources</earSourceDirectory>
           <!--
           <earSourceIncludes>**/ibmconfig/**,**/ibm-application-bnd.xml,lib/**</earSourceIncludes>
