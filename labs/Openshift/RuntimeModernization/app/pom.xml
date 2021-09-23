@@ -10,10 +10,10 @@
   <name>project</name>
 
   <modules>
-        <module>../CustomerOrderServices</module>
-        <module>../CustomerOrderServicesWeb</module>
-        <module>../CustomerOrderServicesTest</module>
-        <module>../CustomerOrderServicesApp</module>
+        <module>CustomerOrderServices</module>
+        <module>CustomerOrderServicesWeb</module>
+        <module>CustomerOrderServicesTest</module>
+        <module>CustomerOrderServicesApp</module>
   </modules>
 
 </project>

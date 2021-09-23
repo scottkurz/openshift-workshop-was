@@ -10,7 +10,6 @@
     <artifactId>project</artifactId>
     <groupId>org.pwte.example</groupId>
     <version>0.1.0-SNAPSHOT</version>
-    <relativePath>../CustomerOrderServicesProject</relativePath>
   </parent>
   <dependencies>
     <dependency>
@@ -68,9 +67,11 @@
               <context-root>CustomerOrderServicesTest</context-root>
             </webModule>
           </modules>
-          <earSourceDirectory>${basedir}</earSourceDirectory>
+          <earSourceDirectory>${project.basedir}/src/main/resources</earSourceDirectory>
+          <!--
           <earSourceIncludes>**/ibmconfig/**,**/ibm-application-bnd.xml,lib/**</earSourceIncludes>
           <earSourceExcludes>**/target/**</earSourceExcludes>
+          -->
           <security>
             <security-role>
               <role-name>SecureShopper</role-name>
