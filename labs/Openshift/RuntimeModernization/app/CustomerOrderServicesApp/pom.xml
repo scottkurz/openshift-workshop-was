@@ -98,6 +98,7 @@
                       <artifactId>*</artifactId>
                   </dependency>
               </copyDependencies>
+              <stripVersion>true</stripVersion>
           </configuration>
       </plugin>
     </plugins>
