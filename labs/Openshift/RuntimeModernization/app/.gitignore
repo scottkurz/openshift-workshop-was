@@ -1,4 +1,4 @@
 target/
-CustomerOrderServicesApp/target/
+*/target/
 .odo\env
 .odo\odo-file-index.json
